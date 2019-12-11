@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhjqsw.wm.hotline.dao.TtransferslipMapper">
+
+  <resultMap id="BaseResultMap" type="com.yhjqsw.wm.hotline.model.Ttransferslip">
+	<id column="id" jdbcType="BIGINT" property="id" />
+	<result column="receiptid" jdbcType="BIGINT" property="receiptid" />
+	<result column="transferer" jdbcType="VARCHAR" property="transferer" />
+	<result column="preId" jdbcType="BIGINT" property="preid" />
+	<result column="postTransReason" jdbcType="VARCHAR" property="posttransreason" />
+	<result column="deliverytime" jdbcType="TIMESTAMP" property="deliverytime" />
+	<result column="viewtime" jdbcType="TIMESTAMP" property="viewtime" />
+	<result column="ifcontractor" jdbcType="VARCHAR" property="ifcontractor" />
+	<result column="ncontractreason" jdbcType="VARCHAR" property="ncontractreason" />
+	<result column="contractorunit" jdbcType="VARCHAR" property="contractorunit" />
+	<result column="contractor" jdbcType="VARCHAR" property="contractor" />
+	<result column="transferstatus" jdbcType="VARCHAR" property="transferstatus" />
+	<result column="startprocesstime" jdbcType="TIMESTAMP" property="startprocesstime" />
+	<result column="endprocesstime" jdbcType="TIMESTAMP" property="endprocesstime" />
+	<result column="processinf" jdbcType="VARCHAR" property="processinf" />
+	<result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <resultMap id="ReceiptMap" type="com.yhjqsw.wm.hotline.model.Treceipt">
+    <id column="receiptid" jdbcType="BIGINT" property="receiptid" />
+        <result column="receiptcode" jdbcType="VARCHAR" property="receiptcode" />
+        <result column="callername" jdbcType="VARCHAR" property="callername" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="category" jdbcType="VARCHAR" property="category" />
+        <result column="callertel" jdbcType="VARCHAR" property="callertel" />
+        <result column="telcontent" jdbcType="VARCHAR" property="telcontent" />
+
+  </resultMap>
+
+  <resultMap id="ReceiptandTtransfer" type="com.yhjqsw.wm.hotline.model.Ttransferslip">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="receiptid" jdbcType="BIGINT" property="receiptid" />
+    <result column="transferer" jdbcType="VARCHAR" property="transferer" />
+    <result column="preId" jdbcType="BIGINT" property="preid" />
+    <result column="postTransReason" jdbcType="VARCHAR" property="posttransreason" />
+    <result column="deliverytime" jdbcType="TIMESTAMP" property="deliverytime" />
+    <result column="viewtime" jdbcType="TIMESTAMP" property="viewtime" />
+    <result column="ifcontractor" jdbcType="VARCHAR" property="ifcontractor" />
+    <result column="ncontractreason" jdbcType="VARCHAR" property="ncontractreason" />
+    <result column="contractorunit" jdbcType="VARCHAR" property="contractorunit" />
+    <result column="contractor" jdbcType="VARCHAR" property="contractor" />
+    <result column="transferstatus" jdbcType="VARCHAR" property="transferstatus" />
+    <result column="startprocesstime" jdbcType="TIMESTAMP" property="startprocesstime" />
+    <result column="endprocesstime" jdbcType="TIMESTAMP" property="endprocesstime" />
+    <result column="processinf" jdbcType="VARCHAR" property="processinf" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <association property="receipt" javaType="com.yhjqsw.wm.hotline.model.Treceipt">
+      <id column="receiptid" jdbcType="BIGINT" property="receiptid" />
+      <result column="receiptcode" jdbcType="VARCHAR" property="receiptcode" />
+      <result column="acceptancetime" jdbcType="TIMESTAMP" property="acceptancetime" />
+      <result column="createname" jdbcType="VARCHAR" property="createname" />
+      <result column="callername" jdbcType="VARCHAR" property="callername" />
+      <result column="callertel" jdbcType="VARCHAR" property="callertel" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="category" jdbcType="VARCHAR" property="category" />
+      <result column="telcontent" jdbcType="VARCHAR" property="telcontent" />
+      <result column="iftransferslip" jdbcType="VARCHAR" property="iftransferslip" />
+      <result column="transfertimes" jdbcType="INTEGER" property="transfertimes" />
+      <result column="processresults" jdbcType="VARCHAR" property="processresults" />
+      <result column="ifvisitback" jdbcType="VARCHAR" property="ifvisitback" />
+      <result column="visitors" jdbcType="VARCHAR" property="visitors" />
+      <result column="revisittime" jdbcType="TIMESTAMP" property="revisittime" />
+      <result column="ifsatisfied" jdbcType="VARCHAR" property="ifsatisfied" />
+      <result column="ifsettlement" jdbcType="VARCHAR" property="ifsettlement" />
+      <result column="settlementtime" jdbcType="TIMESTAMP" property="settlementtime" />
+      <result column="createby" jdbcType="VARCHAR" property="createby" />
+      <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+      <result column="lastupdateBy" jdbcType="VARCHAR" property="lastupdateby" />
+      <result column="lastupdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+      <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </association>
+  </resultMap>
+
+  <insert id="add" parameterType="com.yhjqsw.wm.hotline.model.Ttransferslip">
+    insert into ttransferslip
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="receiptid != null">
+        receiptid,
+      </if>
+      <if test="transferer != null">
+        transferer,
+      </if>
+      <if test="preid != null">
+        preId,
+      </if>
+      <if test="posttransreason != null">
+        postTransReason,
+      </if>
+      <if test="deliverytime != null">
+        deliverytime,
+      </if>
+      <if test="viewtime != null">
+        viewtime,
+      </if>
+      <if test="ifcontractor != null">
+        ifcontractor,
+      </if>
+      <if test="ncontractreason != null">
+        ncontractreason,
+      </if>
+      <if test="contractorunit != null">
+        contractorunit,
+      </if>
+      <if test="contractor != null">
+        contractor,
+      </if>
+      <if test="transferstatus != null">
+        transferstatus,
+      </if>
+      <if test="startprocesstime != null">
+        startprocesstime,
+      </if>
+      <if test="endprocesstime != null">
+        endprocesstime,
+      </if>
+      <if test="processinf != null">
+        processinf,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="receiptid != null">
+        #{receiptid,jdbcType=BIGINT},
+      </if>
+      <if test="transferer != null">
+        #{transferer,jdbcType=VARCHAR},
+      </if>
+      <if test="preid != null">
+        #{preid,jdbcType=BIGINT},
+      </if>
+      <if test="posttransreason != null">
+        #{posttransreason,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverytime != null">
+        #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewtime != null">
+        #{viewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifcontractor != null">
+        #{ifcontractor,jdbcType=VARCHAR},
+      </if>
+      <if test="ncontractreason != null">
+        #{ncontractreason,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorunit != null">
+        #{contractorunit,jdbcType=VARCHAR},
+      </if>
+      <if test="contractor != null">
+        #{contractor,jdbcType=VARCHAR},
+      </if>
+      <if test="transferstatus != null">
+        #{transferstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="startprocesstime != null">
+        #{startprocesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endprocesstime != null">
+        #{endprocesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processinf != null">
+        #{processinf,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from ttransferslip
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="update" parameterType="com.yhjqsw.wm.hotline.model.Ttransferslip">
+    update ttransferslip
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="receiptid != null">
+        receiptid = #{receiptid,jdbcType=BIGINT},
+      </if>
+      <if test="transferer != null">
+        transferer = #{transferer,jdbcType=VARCHAR},
+      </if>
+      <if test="preid != null">
+        preId = #{preid,jdbcType=BIGINT},
+      </if>
+      <if test="posttransreason != null">
+        postTransReason = #{posttransreason,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverytime != null">
+        deliverytime = #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewtime != null">
+        viewtime = #{viewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifcontractor != null">
+        ifcontractor = #{ifcontractor,jdbcType=VARCHAR},
+      </if>
+      <if test="ncontractreason != null">
+        ncontractreason = #{ncontractreason,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorunit != null">
+        contractorunit = #{contractorunit,jdbcType=VARCHAR},
+      </if>
+      <if test="contractor != null">
+        contractor = #{contractor,jdbcType=VARCHAR},
+      </if>
+      <if test="transferstatus != null">
+        transferstatus = #{transferstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="startprocesstime != null">
+        startprocesstime = #{startprocesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endprocesstime != null">
+        endprocesstime = #{endprocesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processinf != null">
+        processinf = #{processinf,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from ttransferslip
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="findByReceiptid" parameterType="java.lang.Long" resultMap="ReceiptMap">
+    select receiptcode,callername,address,category,callertel,telcontent
+    from treceipt
+      <if test="receiptid != null and receiptid != '' ">
+        where receiptid = #{receiptid,jdbcType=BIGINT}
+      </if>
+    </select>
+  <select id="findTraAndReceipt"  resultMap="ReceiptandTtransfer" >
+    select t.*,r.* from treceipt r,ttransferslip t
+     where r.receiptid=t.receiptid and t.transferstatus!='3'
+     <if test="receiptcode != null and receiptcode != ''">
+       and r.receiptcode = #{receiptcode,jdbcType=VARCHAR}
+     </if>
+
+  </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select * from ttransferslip
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from ttransferslip
+  </select>
+
+  <select id="findviewtime" parameterType="java.lang.Long" resultType="int">
+    select count(*) from ttransferslip where id = #{id,jdbcType=BIGINT} and viewtime is null
+  </select>
+  <select id="findstatus" parameterType="java.lang.Long" resultType="int">
+    select transferstatus from ttransferslip where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="iftransferslip" parameterType="java.lang.Long" resultType="int">
+    select count(*) from ttransferslip where receiptid = #{id,jdbcType=BIGINT} and transferstatus =1
+  </select>
+  <select id="nocheck" resultMap="ReceiptandTtransfer">
+    select t.*,r.* from treceipt r,ttransferslip t
+     where r.receiptid=t.receiptid and viewtime is null
+  </select>
+</mapper>

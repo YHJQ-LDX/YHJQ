@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhjqsw.wm.hotline.dao.TcategoryMapper">
+
+  <resultMap id="BaseResultMap" type="com.yhjqsw.wm.hotline.model.Tcategory">
+	<id column="id" jdbcType="BIGINT" property="id" />
+	<result column="category" jdbcType="VARCHAR" property="category" />
+	<result column="maxprocesstime" jdbcType="TIMESTAMP" property="maxprocesstime" />
+	<result column="createBy" jdbcType="VARCHAR" property="createby" />
+	<result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+	<result column="lastUpdateBy" jdbcType="VARCHAR" property="lastupdateby" />
+	<result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+	<result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  
+  <insert id="add" parameterType="com.yhjqsw.wm.hotline.model.Tcategory">
+    insert into tcategory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="maxprocesstime != null">
+        maxprocesstime,
+      </if>
+      <if test="createby != null">
+        createBy,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="lastupdateby != null">
+        lastUpdateBy,
+      </if>
+      <if test="lastupdatetime != null">
+        lastUpdateTime,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="maxprocesstime != null">
+        #{maxprocesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdateby != null">
+        #{lastupdateby,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from tcategory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="update" parameterType="com.yhjqsw.wm.hotline.model.Tcategory">
+    update tcategory
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="maxprocesstime != null">
+        maxprocesstime = #{maxprocesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdateby != null">
+        lastUpdateBy = #{lastupdateby,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from tcategory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="findPage" resultMap="BaseResultMap">
+  select * from tcategory
+</select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from tcategory
+  </select>
+  <select id="findPageByCondition" resultMap="BaseResultMap" parameterType="String">
+    select * from tcategory
+  </select>
+
+</mapper>

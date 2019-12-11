@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhjqsw.wm.hotline.dao.TreceiptMapper">
+
+  <resultMap id="BaseResultMap" type="com.yhjqsw.wm.hotline.model.Treceipt">
+	<id column="receiptid" jdbcType="BIGINT" property="receiptid" />
+	<result column="receiptcode" jdbcType="VARCHAR" property="receiptcode" />
+	<result column="acceptancetime" jdbcType="TIMESTAMP" property="acceptancetime" />
+	<result column="createname" jdbcType="VARCHAR" property="createname" />
+	<result column="callername" jdbcType="VARCHAR" property="callername" />
+	<result column="callertel" jdbcType="VARCHAR" property="callertel" />
+	<result column="address" jdbcType="VARCHAR" property="address" />
+	<result column="category" jdbcType="VARCHAR" property="category" />
+	<result column="telcontent" jdbcType="VARCHAR" property="telcontent" />
+	<result column="iftransferslip" jdbcType="VARCHAR" property="iftransferslip" />
+	<result column="transfertimes" jdbcType="INTEGER" property="transfertimes" />
+	<result column="processresults" jdbcType="VARCHAR" property="processresults" />
+	<result column="ifvisitback" jdbcType="VARCHAR" property="ifvisitback" />
+	<result column="visitors" jdbcType="VARCHAR" property="visitors" />
+	<result column="revisittime" jdbcType="TIMESTAMP" property="revisittime" />
+	<result column="ifsatisfied" jdbcType="VARCHAR" property="ifsatisfied" />
+	<result column="ifsettlement" jdbcType="VARCHAR" property="ifsettlement" />
+	<result column="settlementtime" jdbcType="TIMESTAMP" property="settlementtime" />
+	<result column="createby" jdbcType="VARCHAR" property="createby" />
+	<result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+	<result column="lastupdateBy" jdbcType="VARCHAR" property="lastupdateby" />
+	<result column="lastupdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+	<result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <!--对一根据id查询个人信息：级联查询的第二种方法（嵌套结果，执行一个SQL语句）-->
+  <resultMap  id="receptAndtransfer" type="com.yhjqsw.wm.hotline.model.Treceipt">
+    <id column="receiptid" jdbcType="BIGINT" property="receiptid" />
+    <result column="receiptcode" jdbcType="VARCHAR" property="receiptcode" />
+    <result column="acceptancetime" jdbcType="TIMESTAMP" property="acceptancetime" />
+    <result column="createname" jdbcType="VARCHAR" property="createname" />
+    <result column="callername" jdbcType="VARCHAR" property="callername" />
+    <result column="callertel" jdbcType="VARCHAR" property="callertel" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="telcontent" jdbcType="VARCHAR" property="telcontent" />
+    <result column="iftransferslip" jdbcType="VARCHAR" property="iftransferslip" />
+    <result column="transfertimes" jdbcType="INTEGER" property="transfertimes" />
+    <result column="processresults" jdbcType="VARCHAR" property="processresults" />
+    <result column="ifvisitback" jdbcType="VARCHAR" property="ifvisitback" />
+    <result column="visitors" jdbcType="VARCHAR" property="visitors" />
+    <result column="revisittime" jdbcType="TIMESTAMP" property="revisittime" />
+    <result column="ifsatisfied" jdbcType="VARCHAR" property="ifsatisfied" />
+    <result column="ifsettlement" jdbcType="VARCHAR" property="ifsettlement" />
+    <result column="settlementtime" jdbcType="TIMESTAMP" property="settlementtime" />
+    <result column="createby" jdbcType="VARCHAR" property="createby" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastupdateBy" jdbcType="VARCHAR" property="lastupdateby" />
+    <result column="lastupdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <!-- 一对多级联查询-->
+    <collection property="ttransferslip" ofType="com.yhjqsw.wm.hotline.model.Ttransferslip">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="receiptid" jdbcType="BIGINT" property="receiptid" />
+      <result column="transferer" jdbcType="VARCHAR" property="transferer" />
+      <result column="preId" jdbcType="BIGINT" property="preid" />
+      <result column="postTransReason" jdbcType="VARCHAR" property="posttransreason" />
+      <result column="deliverytime" jdbcType="TIMESTAMP" property="deliverytime" />
+      <result column="viewtime" jdbcType="TIMESTAMP" property="viewtime" />
+      <result column="ifcontractor" jdbcType="VARCHAR" property="ifcontractor" />
+      <result column="ncontractreason" jdbcType="VARCHAR" property="ncontractreason" />
+      <result column="contractorunit" jdbcType="VARCHAR" property="contractorunit" />
+      <result column="contractor" jdbcType="VARCHAR" property="contractor" />
+      <result column="transferstatus" jdbcType="VARCHAR" property="transferstatus" />
+      <result column="startprocesstime" jdbcType="TIMESTAMP" property="startprocesstime" />
+      <result column="endprocesstime" jdbcType="TIMESTAMP" property="endprocesstime" />
+      <result column="processinf" jdbcType="VARCHAR" property="processinf" />
+      <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    receiptid,receiptcode,acceptancetime,createname,callername,callertel,address,category,telcontent,
+    iftransferslip,transfertimes,processresults,ifvisitback,visitors,revisittime,ifsatisfied,ifsettlement,
+    settlementtime,createby,createtime,lastupdateBy,lastupdateTime,remark
+  </sql>
+
+  <insert id="add" parameterType="com.yhjqsw.wm.hotline.model.Treceipt">
+    insert into treceipt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="receiptid != null">
+        receiptid,
+      </if>
+      <if test="receiptcode != null">
+        receiptcode,
+      </if>
+      <if test="acceptancetime != null">
+        acceptancetime,
+      </if>
+      <if test="createname != null">
+        createname,
+      </if>
+      <if test="callername != null">
+        callername,
+      </if>
+      <if test="callertel != null">
+        callertel,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="telcontent != null">
+        telcontent,
+      </if>
+      <if test="iftransferslip != null">
+        iftransferslip,
+      </if>
+      <if test="transfertimes != null">
+        transfertimes,
+      </if>
+      <if test="processresults != null">
+        processresults,
+      </if>
+      <if test="ifvisitback != null">
+        ifvisitback,
+      </if>
+      <if test="visitors != null">
+        visitors,
+      </if>
+      <if test="revisittime != null">
+        revisittime,
+      </if>
+      <if test="ifsatisfied != null">
+        ifsatisfied,
+      </if>
+      <if test="ifsettlement != null">
+        ifsettlement,
+      </if>
+      <if test="settlementtime != null">
+        settlementtime,
+      </if>
+      <if test="createby != null">
+        createby,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="lastupdateby != null">
+        lastupdateBy,
+      </if>
+      <if test="lastupdatetime != null">
+        lastupdateTime,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="receiptid != null">
+        #{receiptid,jdbcType=BIGINT},
+      </if>
+      <if test="receiptcode != null">
+        #{receiptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptancetime != null">
+        #{acceptancetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createname != null">
+        #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="callername != null">
+        #{callername,jdbcType=VARCHAR},
+      </if>
+      <if test="callertel != null">
+        #{callertel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="telcontent != null">
+        #{telcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="iftransferslip != null">
+        #{iftransferslip,jdbcType=VARCHAR},
+      </if>
+      <if test="transfertimes != null">
+        #{transfertimes,jdbcType=INTEGER},
+      </if>
+      <if test="processresults != null">
+        #{processresults,jdbcType=VARCHAR},
+      </if>
+      <if test="ifvisitback != null">
+        #{ifvisitback,jdbcType=VARCHAR},
+      </if>
+      <if test="visitors != null">
+        #{visitors,jdbcType=VARCHAR},
+      </if>
+      <if test="revisittime != null">
+        #{revisittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifsatisfied != null">
+        #{ifsatisfied,jdbcType=VARCHAR},
+      </if>
+      <if test="ifsettlement != null">
+        #{ifsettlement,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementtime != null">
+        #{settlementtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdateby != null">
+        #{lastupdateby,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from treceipt
+    where receiptid = #{receiptid,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="update" parameterType="com.yhjqsw.wm.hotline.model.Treceipt">
+    update treceipt
+    <set>
+      <if test="receiptid != null">
+        receiptid = #{receiptid,jdbcType=BIGINT},
+      </if>
+      <if test="receiptcode != null">
+        receiptcode = #{receiptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptancetime != null">
+        acceptancetime = #{acceptancetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createname != null">
+        createname = #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="callername != null">
+        callername = #{callername,jdbcType=VARCHAR},
+      </if>
+      <if test="callertel != null">
+        callertel = #{callertel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="telcontent != null">
+        telcontent = #{telcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="iftransferslip != null">
+        iftransferslip = #{iftransferslip,jdbcType=VARCHAR},
+      </if>
+      <if test="transfertimes != null">
+        transfertimes = #{transfertimes,jdbcType=INTEGER},
+      </if>
+      <if test="processresults != null">
+        processresults = #{processresults,jdbcType=VARCHAR},
+      </if>
+      <if test="ifvisitback != null">
+        ifvisitback = #{ifvisitback,jdbcType=VARCHAR},
+      </if>
+      <if test="visitors != null">
+        visitors = #{visitors,jdbcType=VARCHAR},
+      </if>
+      <if test="revisittime != null">
+        revisittime = #{revisittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifsatisfied != null">
+        ifsatisfied = #{ifsatisfied,jdbcType=VARCHAR},
+      </if>
+      <if test="ifsettlement != null">
+        ifsettlement = #{ifsettlement,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementtime != null">
+        settlementtime = #{settlementtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        createby = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdateby != null">
+        lastupdateBy = #{lastupdateby,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where receiptid = #{receiptid,jdbcType=BIGINT}
+  </update>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from treceipt
+    where receiptid = #{receiptid,jdbcType=BIGINT}
+  </select>
+  
+  <select id="findPage" resultMap="BaseResultMap">
+    select * from treceipt
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from treceipt
+  </select>
+
+  <select id="findall"  resultMap="receptAndtransfer">
+    select r.*,t.* from treceipt r
+    left join ttransferslip t on r.receiptid=t.receiptid
+    where 1=1
+    <if test="receiptcode != null and receiptcode != ''">
+    and r.receiptcode = #{receiptcode,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null and address != ''">
+      and r.address like CONCAT('%',#{address,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="callertel != null and callertel != ''">
+      and r.callertel like  #{callertel,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+</mapper>
