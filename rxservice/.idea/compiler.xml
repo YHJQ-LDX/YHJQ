@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="kitty-admin" />
+        <module name="kitty-common" />
+        <module name="kitty-core" />
+        <module name="rx-admin" />
+        <module name="wm-admin" />
+        <module name="wm-core" />
+        <module name="wn-core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kitty-admin" target="1.8" />
+      <module name="kitty-common" target="1.8" />
+      <module name="kitty-core" target="1.8" />
+      <module name="mybatisgenerator" target="1.8" />
+      <module name="rx-admin" target="1.8" />
+      <module name="watermeasurement" target="1.8" />
+      <module name="wm-admin" target="1.8" />
+      <module name="wm-common" target="1.8" />
+      <module name="wm-core" target="1.8" />
+      <module name="wn-core" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
