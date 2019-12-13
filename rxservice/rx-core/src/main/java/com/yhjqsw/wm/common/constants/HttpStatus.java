@@ -11,6 +11,7 @@ package com.yhjqsw.wm.common.constants;
  */
 public interface HttpStatus {
 
+
     // --- 1xx Informational ---
 
     /** {@code 100 Continue} (HTTP/1.1 - RFC 2616) */
